@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+    <style>
+        #dice {
+            width: 150px;
+            height: 150px;
+            margin: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Dice Rolling Game!</h1>
+    
+    <label for="userInput">Enter a number between 1 and 6:</label>
+    <input type="number" id="userInput" min="1" max="6">
+    <button onclick="rollDice()">Roll Dice</button>
+
+    <img id="dice" src="rolling_dice.gif" alt="Rolling Dice">
+
+    <p id="result"></p>
+
+    <script>
+        function rollDice() {
+            var userInput = document.getElementById("userInput").value;
+            var diceImage = document.getElementById("dice");
+            var resultParagraph = document.getElementById("result");
+
+            // Check if the user input is valid
+            if (userInput < 1 || userInput > 6 || isNaN(userInput)) {
+                alert("Please enter a valid number between 1 and 6.");
+                return;
+            }
+
+            // Show the dice rolling animation
+            diceImage.style.display = "block";
+
+            // Simulate a dice roll after a delay
+            setTimeout(function () {
+                var diceResult = Math.floor(Math.random() * 6) + 1;
+
+                // Display the dice result
+                diceImage.style.display = "none";
+                
+                // Check if the user wins or loses
+                if (parseInt(userInput) === diceResult) {
+                    resultParagraph.innerHTML = "Congratulations! You win!";
+                } else {
+                    resultParagraph.innerHTML = "Sorry, you lose. Better luck next time!";
+                }
+            }, 3000); // Adjust the delay (in milliseconds) based on your preference
+        }
+    </script>
+</body>
+</html>
